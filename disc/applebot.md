@@ -8,7 +8,8 @@
 Welcome to AppleBot 2.0! C Edition! We fixed that nasty bug from last time, and migrated to a cleaner interface. Enjoy the apples!
 
 ## Attachments
-https://fdownl.ga/569F7B3808
+[Download C code](https://fdownl.ga/569F7B3808)
+
 ``nc imaginary.ml 10042``
 
 ## Solution
