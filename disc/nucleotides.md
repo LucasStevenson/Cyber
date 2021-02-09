@@ -1,6 +1,7 @@
 # Nucleotides
 
 > Points: 150
+
 > Category: Programming/Math
 
 ## Description

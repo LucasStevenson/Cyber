@@ -1,5 +1,6 @@
 # Null
 > Points: 50
+
 > Category: Crypto
 
 ## Description

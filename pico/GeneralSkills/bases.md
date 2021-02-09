@@ -1,5 +1,6 @@
 # Bases
 > Points: 100
+
 > Category: General Skills
 
 ## Description
