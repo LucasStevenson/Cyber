@@ -20,6 +20,7 @@ https://bluelazyparentheses.oleanderson.repl.co/
 
 3. Check the website's cookies
 ![step 3](https://i.imgur.com/ss8Oc23.png)
+
 It says our flavor is Chocolate chip even though that's not what we ordered.
 
 4. Change the value of the cookie by typing in the dev console
