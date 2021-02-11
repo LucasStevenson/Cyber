@@ -13,7 +13,7 @@ Flag is ictf{PasswordYouGet}
 https://fdownl.ga/CDCFDAEF4C
 
 ## Solution
-We are given both a zip file that contains a ``passwd`` and ``shadow`` file.
+We are given a zip file that contains a ``passwd`` and ``shadow`` file.
 
 [Unshadow](https://www.commandlinux.com/man-page/man8/unshadow.8.html) the two files
 
