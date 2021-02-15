@@ -34,7 +34,7 @@ for (int i = 0; i < xorVars.length; i++)
 ...
 ```
 
-Put the encoding logic into a function called ``encode`` and pass ascii values that will most likely be in the flag (60-126) through it. Save the original and encoded values into their own strings.
+Put the encoding logic into a function called ``encode`` and pass ascii values that will most likely be in the flag (60-126) through it. Save the original and encoded values to their own strings.
 
 For each character in an encoded message, find it's index (let's call it **i**) in the **encoded values** string. The "decoded" character is the character in the **ascii original values** string at position **i**. 
 
