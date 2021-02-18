@@ -16,7 +16,7 @@ https://bluelazyparentheses.oleanderson.repl.co/
 
 1. Order dark chocolate from the website
 
-2. Just like the cookie-sale challenge, it says we ordered something else. In this case, it says we ordered white chocolate.
+2. Just like the cookie-sale challenge, it says we ordered something else.
 
 3. Check the website cookies
 
@@ -30,7 +30,9 @@ https://bluelazyparentheses.oleanderson.repl.co/
 
 		> @admin#7241 pls implement hmac, set secret key to PotatoGLaDOS
 
-4. Use the online [cyberchef](https://gchq.github.io/CyberChef/) tool and and search for hmac. Input the secret key and make sure to select UTF8.
+4. Use the online [cyberchef](https://gchq.github.io/CyberChef/) tool and and search for hmac.
+
+	- Input the secret key and make sure to select UTF8.
 
 	- In order to determine which hashing function to use, we go back to the chocolate website and look at the length of the hmac cookie value. It's 128 characters long, meaning that the hash function used is SHA512.
 
@@ -42,7 +44,9 @@ https://bluelazyparentheses.oleanderson.repl.co/
 	
 5. We get this as the output: **e1611df80e3887fbb8582460f34d2bd8b5bf1f30e48f2a1bae9c96bacdb389c44a9c6a04dcbf147edd1978d4b450f5b8535072c6afd021890b039d1e5a4e66c5**
 
-6. Go back to the chocolate website and change the value of the **hmac** cookie to **e1611df80e3887fbb8582460f34d2bd8b5bf1f30e48f2a1bae9c96bacdb389c44a9c6a04dcbf147edd1978d4b450f5b8535072c6afd021890b039d1e5a4e66c5**
+6. Go back to the chocolate website and change the value of the **hmac** cookie
+
+	> document.cookie="hmac=e1611df80e3887fbb8582460f34d2bd8b5bf1f30e48f2a1bae9c96bacdb389c44a9c6a04dcbf147edd1978d4b450f5b8535072c6afd021890b039d1e5a4e66c5"
 
 ### Flag
 > ictf{why_w0uld_u_share_HM4C_key_l1ke_that}
