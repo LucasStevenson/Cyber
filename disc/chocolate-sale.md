@@ -40,13 +40,13 @@ https://bluelazyparentheses.oleanderson.repl.co/
 
 	- Cyberchef recipe should look like this
 
-		![cf output](https://i.imgur.com/IQ0FS5V.png)
+		![cf output](https://i.imgur.com/yijQOZV.png)
 	
-5. We get this as the output: **e1611df80e3887fbb8582460f34d2bd8b5bf1f30e48f2a1bae9c96bacdb389c44a9c6a04dcbf147edd1978d4b450f5b8535072c6afd021890b039d1e5a4e66c5**
-
-6. Go back to the chocolate website and change the value of the **hmac** cookie
-
-	> document.cookie="hmac=e1611df80e3887fbb8582460f34d2bd8b5bf1f30e48f2a1bae9c96bacdb389c44a9c6a04dcbf147edd1978d4b450f5b8535072c6afd021890b039d1e5a4e66c5"
+5. Go back to the chocolate website and change the value of the **hmac** cookie
+	
+	```js
+	document.cookie="hmac=e1611df80e3887fbb8582460f34d2bd8b5bf1f30e48f2a1bae9c96bacdb389c44a9c6a04dcbf147edd1978d4b450f5b8535072c6afd021890b039d1e5a4e66c5"
+	```
 
 ### Flag
 > ictf{why_w0uld_u_share_HM4C_key_l1ke_that}
