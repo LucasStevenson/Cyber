@@ -16,7 +16,7 @@ https://fdownl.ga/BAAFA62B3B
 
 We are given all the variables except ``c``, so that's probably what we're trying to find and decode.
 
-![c equation](https://latex.codecogs.com/svg.latex?\Large&space;c=(m^e)\bmod(N))
+![formula](https://render.githubusercontent.com/render/math?math=c=(m^e)\bmod(N))
 
 We plug in **m**, **e**, and **N** and use a [modular exponentiation](https://en.wikipedia.org/wiki/Modular_exponentiation) calculator (such as [this](https://planetcalc.com/8977/) one) to find **c**
 
