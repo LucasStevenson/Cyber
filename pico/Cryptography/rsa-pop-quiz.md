@@ -22,9 +22,11 @@ IS THIS POSSIBLE and FEASIBLE? (Y/N):y
 #### TIME TO SHOW ME WHAT YOU GOT! ###
 n: 4636878989
 Outstanding move!!!
-```
 
-n = p\*q
+
+EXPLANATION:
+n = p*q
+```
 
 ```
 #### NEW PROBLEM ####
@@ -36,9 +38,11 @@ IS THIS POSSIBLE and FEASIBLE? (Y/N):y
 #### TIME TO SHOW ME WHAT YOU GOT! ###
 q: 93089
 Outstanding move!!!
-```
 
+
+EXPLANATION:
 q = n/p
+```
 
 ```
 #### NEW PROBLEM ####
@@ -49,9 +53,11 @@ q
 p
 IS THIS POSSIBLE and FEASIBLE? (Y/N):n
 Outstanding move!!!
-```
 
+
+EXPLANATION:
 Not possible because we don't have enough information to get p and q.
+```
 
 ```
 #### NEW PROBLEM ####
@@ -63,9 +69,11 @@ IS THIS POSSIBLE and FEASIBLE? (Y/N):y
 #### TIME TO SHOW ME WHAT YOU GOT! ###
 totient(n): 836623060
 Outstanding move!!!
-```
 
+
+EXPLANATION:
 totient(n) = (p-1)(q-1)
+```
 
 ```
 #### NEW PROBLEM ####
@@ -78,9 +86,11 @@ IS THIS POSSIBLE and FEASIBLE? (Y/N):y
 #### TIME TO SHOW ME WHAT YOU GOT! ###
 ciphertext: 256931246631782714357241556582441991993437399854161372646318659020994329843524306570818293602492485385337029697819837182169818816821461486018802894936801257629375428544752970630870631166355711254848465862207765051226282541748174535990314552471546936536330397892907207943448897073772015986097770443616540466471245438117157152783246654401668267323136450122287983612851171545784168132230208726238881861407976917850248110805724300421712827401063963117423718797887144760360749619552577176382615108244813
 Outstanding move!!!
-```
 
+
+EXPLANATION:
 c = (plaintext^e) mod(N)
+```
 
 ```
 #### NEW PROBLEM ####
@@ -91,9 +101,11 @@ n : 2756699629150821393241937138514152285934322656005092119629476187050084614013
 plaintext
 IS THIS POSSIBLE and FEASIBLE? (Y/N):n
 Outstanding move!!!
-```
 
-Not possible because we need **d** to get the plaintext. We need p and q to get d, and since there's not enough info to get p and q, we can't get the plaintext.
+
+EXPLANATION:
+Not possible because we need d (private key) to get the plaintext. We need p and q to get d, and since there's not enough info to get p and q, we can't get the plaintext.
+```
 
 ```
 #### NEW PROBLEM ####
@@ -106,11 +118,12 @@ IS THIS POSSIBLE and FEASIBLE? (Y/N):y
 #### TIME TO SHOW ME WHAT YOU GOT! ###
 d: 1405046269503207469140791548403639533127416416214210694972085079171787580463776820425965898174272870486015739516125786182821637006600742140682552321645503743280670839819078749092730110549881891271317396450158021688253989767145578723458252769465545504142139663476747479225923933192421405464414574786272963741656223941750084051228611576708609346787101088759062724389874160693008783334605903142528824559223515203978707969795087506678894006628296743079886244349469131831225757926844843554897638786146036869572653204735650843186722732736888918789379054050122205253165705085538743651258400390580971043144644984654914856729
 Outstanding move!!!
-```
 
+
+EXPLANATION:
 d = e^-1 mod(totient(n))
-
-I recommend using an [online tool](https://www.dcode.fr/modular-inverse)
+I recommend using https://www.dcode.fr/modular-inverse
+```
 
 ```
 #### NEW PROBLEM ####
@@ -125,19 +138,20 @@ IS THIS POSSIBLE and FEASIBLE? (Y/N):y
 plaintext: 14311663942709674867122208214901970650496788151239520971623411712977120586163535880168563325
 Outstanding move!!!
 
-
 If you convert the last plaintext to a hex number, then ascii, you'll find what you need! ;)
-```
 
+
+EXPLANATION:
 plaintext = c^d mod(n)
 
 1. Find d
 
    - d = e^-1 mod(totient(n))
 
-2. Plug into plaintext formula and use an [online tool](https://www.dcode.fr/modular-exponentiation) to compute the answer
+2. Plug into plaintext formula and use an online tool such as https://www.dcode.fr/modular-exponentiation to compute the answer
+```
 
-Finally, to get the flag, we run this python script
+`Finally, to get the flag, we run this python script`
 
 ```py
 p = hex(14311663942709674867122208214901970650496788151239520971623411712977120586163535880168563325)[2:]
