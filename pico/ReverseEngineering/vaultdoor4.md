@@ -10,7 +10,7 @@ This vault uses ASCII encoding for the password. The source code for this vault 
 
 ## Solution
 
-1. Convert each element in `myBytes` array to it's base10 (decimal) representation with `Byte.toString()` method.
+1. Convert each element in `myBytes` array to its base10 (decimal) representation with `Byte.toString()` method.
 
 2. This will return a string, so convert to type `int` with `Integer.parseInt()` method
 

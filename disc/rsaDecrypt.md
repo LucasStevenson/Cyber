@@ -29,7 +29,7 @@ I also didn't know about the `long_to_bytes` function in the python `Crypto` mod
 >>> long_to_bytes(c)
 ```
 
-#### Back to the original solution...
+### Back to the original solution...
 
 We are given all the variables except `c`, so that's probably what we're trying to find and decode.
 
