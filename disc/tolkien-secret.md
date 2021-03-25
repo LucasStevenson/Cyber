@@ -28,9 +28,9 @@ Kinda looks similar to a jwt. Just like a jwt, we can change the payload (sessio
 
 The cryptographic hash is what makes the cookie secure. It's a SHA1 hash that's based off the session data, timestamp, and the secret key.
 
-We already know the secret key is because it's right at the top of the website. SECRETKEY = **KeepItSecret**.
+We already know what the secret key is because it's right at the top of the website. SECRETKEY = **KeepItSecret**.
 
-Below is a python script that forges flask session cookies.
+Below is a python script that will forge a new session cookie.
 
 ```py
 from flask.sessions import SecureCookieSessionInterface
