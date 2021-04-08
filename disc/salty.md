@@ -51,7 +51,7 @@ Putting the hash into [crackstation](https://crackstation.net/), we get
 
 | Hash                                                                                                                                   | Type   | Result    |
 | -------------------------------------------------------------------------------------------------------------------------------------- | ------ | --------- |
-| 5b9adabb71135fb0132fe4ebaf3f3bf94057c1b9e076330f37cbdd94d5bd4f00<br />28c3e38d4b6b17773dd49fce6a5afe7fabfccbf85d6452e9b1f78e5423d5ca0c | sha256 | saltwater |
+| 5b9adabb71135fb0132fe4ebaf3f3bf94057c1b9e076330f37cbdd94d5bd4f00<br />28c3e38d4b6b17773dd49fce6a5afe7fabfccbf85d6452e9b1f78e5423d5ca0c | sha512 | saltwater |
 
 Since the function already prepends "salt" to the input, we know our password is **water**
 
