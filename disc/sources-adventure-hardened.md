@@ -51,11 +51,11 @@ We can see 2 html comments on rooYay2's resume page
 <!-- also create a custom employee portal for rooYay2 based on his interests please -->
 ```
 
-By scrolling over his profile picture, we can see that his favorite emoji is `rooNoBooli`. We can also see that cookies are his favorite snack. This is a hint for later on.
+We can see that his favorite emoji is `rooNoBooli` by scrolling over his profile picture. We can also see that cookies are his favorite snack. This is a hint for later on.
 
-Now we have enough information to log into rooYay2's account. (username=rooYay2, password=rooNoBooli). After logging in, we can see a new notification from the boss welcoming him and telling him about the company policies.
+Now we have enough information to log into rooYay2's account (username=rooYay2, password=rooNoBooli). After logging in, we can see a new notification from the boss welcoming him and telling him about the company policies.
 
-The 4th rule tells him that he's "`responsible for all rules hidden throughout our website, as well as in between the lines ;)`". There's a div tag with id="lines" that has a commented out p tag that just says "`It's time for the sources adventure`". _(Not really that helpful)_
+The 4th rule tells him that he's "`responsible for all rules hidden throughout our website, as well as in between the lines ;)`". There's a div tag with id="lines" that has a commented out p tag that just says "`It's time for the sources adventure`". _(that was kinda anticlimatic)_
 
 The previous step referenced cookies, so let's check the website's cookies
 
@@ -73,11 +73,9 @@ Logging in with those credentials (`username=panel`, `password="991560128"licypz
 https://sources-adventure-hardened.max49.repl.co/payroll brings us to a page with a json file that we have to download. In this file, there are parts of the flag that we have to string together. Below is a python script that does just that.
 
 ```py
-with open("payrollinformationictf.json") as f:
-    line = f.readline()
-    line = eval(line)
+vals = eval(open("payrollinformationictf.json", 'r').read())
 arr = []
-for i in line:
+for i in vals:
     arr.insert(0,i["ID Code"])
 print(''.join(arr))
 ```
