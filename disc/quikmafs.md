@@ -16,7 +16,7 @@ https://fdownl.ga/B06E35A33C
 
 ## Solution
 
-I wrote a python script that uses pwntools to solve all the problems (there's 272 btw).
+I wrote a python script that solves all the problems (there's 272 btw).
 
 ```py
 from pwn import *
@@ -63,10 +63,7 @@ while True:
         # print(q)
         ans = eval(q[-8:-3])
 
-        if ans < 0:
-            s += '0'
-        else:
-            s += '1'
+        s += '0' if ans < 0 else '1'
         # print(ans)
         p.sendline(str(ans).encode())
     except Exception as e:
