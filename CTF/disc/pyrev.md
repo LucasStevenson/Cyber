@@ -26,6 +26,8 @@ https://imaginary.ml/r/7F0C-out.txt
 
 ## Solution
 
+This challenge had to do with the python `dis` module.
+
 ```py
 n = ord("i")
 for x in (0, 6, -17, 14, -21, 25, -23, 5, 15, 2, -12, 11, -1, 6, -4, -12, -6, 9, 8, 5, -3, -3, 6, -6, 4, -18, -6, 26, -2, -18, 20, -17, -9, -4):
