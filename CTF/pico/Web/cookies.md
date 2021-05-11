@@ -12,11 +12,10 @@ Who doesn't love cookies? Try to figure out the best one. http://mercury.picoctf
 
 The challenge is to find the correct numerical value to pass into the **name** cookie so that it outputs the flag.
 
-We can easily automate this process with a simple shell script that keeps looping through numbers and sending it to the website until it gives the flag.
+We can easily automate this process with a simple shell script that loops through numbers and sends it to the website until it gives us the flag.
 
 ```sh
 #!/bin/bash
-
 count=0
 while true; do
 	cmd="curl -b name=${count} http://mercury.picoctf.net:54219/check"
