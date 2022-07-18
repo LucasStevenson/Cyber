@@ -206,13 +206,13 @@ Last challenge before the big CTF! Bog-standard RSA, but I made some of the numb
 
 ---
 
-In this challenge's implementation of RSA, $$d$$, the private key, is a randomly generated 32 bit prime number. 32 bits is too much to brute force, but it still felt really small in the grand scope of things. After doing some research, I came across [this crypto stackexchange](https://crypto.stackexchange.com/questions/109/rsa-with-small-exponents) thread that discusses the security issues with using small exponents in RSA. One of the posts said this
+In this challenge's implementation of RSA, `d`, the private key, is a randomly generated 32 bit prime number. 32 bits is too much to brute force, but it still felt really small in the grand scope of things. After doing some research, I came across [this crypto stackexchange](https://crypto.stackexchange.com/questions/109/rsa-with-small-exponents) thread that discusses the security issues with using small exponents in RSA. One of the posts said this
 
 > You need to keep d larger than the 4th root of n=pq. Otherwise Wiener's Attack can be used to compute d
 
-In this situation, $$n$$ is the product of two 512 bit primes, whereas $$d$$ is a mere 32 bit prime number. It's pretty clear Wiener's attack is the way to go.
+In this situation, `n` is the product of two 512 bit primes, whereas `d` is a mere 32 bit prime number. It's pretty clear Wiener's attack is the way to go.
 
-I found [this website](https://cryptohack.gitbook.io/cryptobook/untitled/low-private-component-attacks/wieners-attack) (highly recommended checking it out) that dives into the theory behind Wiener's attack and also provides a sagemath implementation of it in python. That's where the code below came from. I replaced the example $$c, e, n$$ values with the ones we were given and ran it in [SageMathCell](https://sagecell.sagemath.org/)
+I found [this website](https://cryptohack.gitbook.io/cryptobook/untitled/low-private-component-attacks/wieners-attack) (highly recommended checking it out) that dives into the theory behind Wiener's attack and also provides a sagemath implementation of it in python. That's where the code below came from. I replaced the example `c, e, n` values with the ones we were given and ran it in [SageMathCell](https://sagecell.sagemath.org/)
 
 ```py
 def wiener(e, n):
