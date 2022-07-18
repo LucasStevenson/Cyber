@@ -45,7 +45,7 @@ lucas@lucas:/tmp/flag$ ls -a
 .  ..  .DS_Store  flag.jpg
 ```
 
-I thought I would just check out the `.DS_STORE` file, although I wasn't expecting there to be anything useful in there
+I thought I would just check out the `.DS_STORE` file, although I wasn't expecting to find anything useful in there
 
 ```sh
 lucas@lucas:/tmp/flag$ cat .DS_Store 
