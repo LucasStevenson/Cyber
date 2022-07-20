@@ -10,11 +10,11 @@ Let's decrypt this: [ciphertext](https://jupiter.challenges.picoctf.org/static/e
 
 ## Solution
 
-We're given `N, e, ct`, except `e` is `3` instead of the usual `65537`. In deployed versions of RSA that use [padding](https://en.wikipedia.org/wiki/RSA_%28cryptosystem%29#Padding_schemes), this actually wouldn't be a problem. For the sake of this problem, I'm going to assume that this is a textbook implementation of RSA (i.e. no padding)
+We're given `N, e, ct`, except `e` is `3` instead of the usual `65537`. In deployed versions of RSA that use [padding](https://en.wikipedia.org/wiki/RSA_%28cryptosystem%29#Padding_schemes), this actually wouldn't be a problem. For the sake of this challenge, I'm going to assume that this is a textbook implementation of RSA (i.e. no padding)
 
 In RSA, we know $c = m^{e} \pmod{N}$
 
-We also know that a smaller number mod a bigger number will always return the smaller number. Since `e` is so small, there's a good chance that $m^{e} < N$. If it is, then we can drop the mod, meaning $c = m^{e}$. This can easily be solved by taking the 3rd root of `c`
+We also know that a smaller number mod a bigger number will always return the smaller number. Since `e` is only `3`, there's a good chance that $m^{e} < N$. If it is, then we can drop the mod, meaning $c = m^{3}$. This can easily be solved by taking the 3rd root of `c`. Below is a python script that uses the sympy `integer_nthroot` method to calculate $m = \sqrt[3]{c}$
 
 ```py
 #!/usr/bin/env python3
