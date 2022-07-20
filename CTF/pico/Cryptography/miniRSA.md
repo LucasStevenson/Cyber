@@ -14,7 +14,7 @@ We're given `N, e, ct`, except `e` is `3` instead of the usual `65537`. In deplo
 
 In RSA, we know $c = m^{e} \pmod{N}$
 
-We also know that a smaller number mod a bigger number will always return the smaller number. Since `e` is only `3`, there's a good chance that $m^{e} < N$. If it is, then we can drop the mod, meaning $c = m^{3}$. This can easily be solved by taking the 3rd root of `c`. Below is a python script that uses the sympy `integer_nthroot` method to calculate $m = \sqrt[3]{c}$
+As a general rule, we also know that a smaller number mod a bigger number will always return the smaller number. Since `e` is only `3`, there's a good chance that $m^{e} < N$. If it is, then we can drop the mod, meaning $c = m^{3}$. This can easily be solved by taking the cube root of `c`. Below is a python script that uses the sympy `integer_nthroot` method to calculate $m = \sqrt[3]{c}$
 
 ```py
 #!/usr/bin/env python3
