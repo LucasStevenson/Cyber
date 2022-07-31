@@ -4,18 +4,18 @@ The Chinese Remainder Theorem gives a unique solution to a set of linear congrue
 
 This means, that given a set of arbitrary integers $a_{i}$, and pairwise coprime integers $n_{i}$, such that the following linear congruences hold:
 
-> Note "pairwise coprime integers" means that if we have a set of integers ${n_{1}, n_{2}, ..., n_{i}}$, all pairs of integers selected from the set are coprime: $gcd(n_{i}, n_{j}) = 1$.
+> Note "pairwise coprime integers" means that if we have a set of integers ${n_{1}, n_{2}, \ldots, n_{i}}$, all pairs of integers selected from the set are coprime: $gcd(n_{i}, n_{j}) = 1$.
 
 $$
 \begin{gather}
-&x \equiv a_{1} \pmod{n_{1}}\\
-&x \equiv a_{2} \pmod{n_{2}}\\
-&\ldots\\
-&x \equiv a_{n} \pmod{n_{n}}
+  &x \equiv a_{1} \pmod{n_{1}}\\
+  &x \equiv a_{2} \pmod{n_{2}}\\
+  &\ldots\\
+  &x \equiv a_{n} \pmod{n_{n}}
 \end{gather}
 $$
 
-There is a unique solution $x \equiv a \pmod{N}$ where $N = n_{1} * n_{2} * ... * n_{n}$
+There is a unique solution $x \equiv a \pmod{N}$ where $N = n_{1} * n_{2} * \ldots * n_{n}$
 
 In cryptography, we commonly use the Chinese Remainder Theorem to help us reduce a problem of very large integers into a set of several, easier problems.
 
@@ -23,9 +23,9 @@ Given the following set of linear congruences:
 
 $$
 \begin{gather}
-&x \equiv 2 \pmod{5}\phantom{0}\\
-&x \equiv 3 \pmod{11}\\
-&x \equiv 5 \pmod{17}
+  &x \equiv 2 \pmod{5}\phantom{0}\\
+  &x \equiv 3 \pmod{11}\\
+  &x \equiv 5 \pmod{17}
 \end{gather}
 $$
 
