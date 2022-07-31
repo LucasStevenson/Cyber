@@ -34,3 +34,23 @@ Find the integer `a` such that $x \equiv a \pmod{935}$
 > Starting with the congruence with the largest modulus, use that for $x \equiv a \pmod{p}$ we can write $x = a + k\*p$ for arbitrary integer `k`
 
 ## Solution
+
+```py
+#!/usr/bin/env python3
+import math
+
+a = [2,3,5]
+n = [5,11,17]
+N = math.prod(n)
+ans = 0
+
+for ai, ni in zip(a,n):
+    Ni = N//ni
+    Mi = pow(Ni,-1,ni)
+    ans += (ai*Ni*Mi)
+print(ans%N)
+```
+
+### Answer
+
+`872`
