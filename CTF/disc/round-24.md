@@ -260,3 +260,80 @@ b'ictf{have_fun_at_ICTF_22!!!_559543c1}'
 `ictf{have_fun_at_ICTF_22!!!_559543c1}`
 
 ---
+
+# Self-Reference
+
+> Points: 75 | Category: Misc | Author: puzzler7
+
+I recently learned that python lists can contain themselves. Here's a whole bunch of such lists - do they also contain a flag?
+
+- https://imaginaryctf.org/f/LrX5f#out.pickle
+
+---
+
+Unpickling the file gives us a list (which we'll call `unpickled`) of 128 elements. Each one of these elements is a self-referencing list. The fact that `unpickled` has 128 elements is a major hint, because that means the index of each element most likely corresponds to a character's decimal representation on the ascii table. Since we know the flag starts with "ictf", there has to be some sort of relation between `unpickled[ord('i')]` -> `unpickled[ord('c')]` -> `unpickled[ord('t')]` and so on.
+
+```py
+#!/usr/bin/env python3
+import pandas as pd
+
+unpickled = pd.read_pickle("out.pickle")
+def solve(i, seen=[]):
+    if i in seen:
+        return []
+    ret = [i]
+    # must iterate through entire array to compare values, can't use .index() method
+    # unpickled.index(unpickled[i][0]) -> RecursionError
+    # have to use `is` keyword to compare self-referenced lists
+    for idx, el in enumerate(unpickled):
+        if el is unpickled[i][0]:
+            ret += solve(idx,seen+[i])
+	    break
+    return ret
+
+print(bytes(solve(ord('i'))))
+```
+
+`ictf{sphInx_oF-blaCk=qu@rTz~jUdge+my^v0w}`
+
+---
+
+# Unchained
+
+> Points: 75 | Category: Web | Author: puzzler7
+
+I've written so many Flask apps in the past, I thought I'd diversify a bit and try out Django! I wrote this Django app for you guys out of Django **and nothing else so don't even bother looking!**
+
+- http://puzzler7.imaginaryctf.org:3006/
+
+---
+
+I got the flag by going to this url: `http://puzzler7.imaginaryctf.org:3006/flag?user=admin&user=test`. The reason this works is because of something known as **HTTP parameter pollution**, which is a "web application vulnerability exploited by injecting encoded query string delimiters in already existing parameters". In the case of this challenge, it works because Django reads the last definition of user, and Flask reads the first.
+
+HTTP parameter pollution: https://github.com/swisskyrepo/PayloadsAllTheThings/tree/master/HTTP%20Parameter%20Pollution
+
+`ictf{only_accessible_by_schroedinger's_admin}`
+
+---
+
+# Geoguessr Sucks
+
+> Points: 50 | Category: Forensics | Author: puzzler7
+
+I went on a crazy vacation to the middle of nowhere, and I took a real picture with a real camera of this very important field. Where is it?
+
+Flag format is `ictf{lat_long}`, both rounded up to 5 decimal places beause this exact spot is very important to me. Example: `ictf{1.23456_7.89101}`
+
+- https://imaginaryctf.org/f/1OD91
+
+---
+
+Naturally, the first thing I wanted to do was take a look at the [exif metadata](https://blog.idrsolutions.com/what-is-exif-metadata/), because that's more than likely where the GPS information would be. I googled "view image metadata online", and one of the first results was [this website](https://jimpl.com/). I uploaded the provided image onto the site, and it pulled up all the image exif data. After skimming through the results, I found the latitude and longitude
+
+![GPS data](https://i.imgur.com/nTDuwAQ.png)
+
+Great. The only step now is to convert those results to decimal degrees, because right now it's in degree/minute/second (DMS) format. [This website](https://andrew.hedges.name/experiments/convert_lat_long/) is an online DMS to decimal converter. Putting in the information from the screenshot above gives us `lat=39.133697222222224, long=-98.52833611111112`. Round those to 5 decimal places and we got the flag.
+
+`ictf{39.13370_-98.52834}`
+
+---
