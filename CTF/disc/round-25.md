@@ -45,9 +45,17 @@ Something went wrong here...
 
 ---
 
+After initially cat-ing out the file, it looked like the characters got scrambled. I decided to take a closer look by opening the file up in vim
+
+![flag.txt in vim](https://i.imgur.com/SaBsFKK.png)
+
+There's special unicode characters that are scrambling the text and overall making it behave weirdly. In order to get the flag, we need to ignore these. I used the `-o` option in grep to only print out the matching parts (rather than the whole line) of the specified pattern, which in this case is a set of alphanumeric characters. Each match will be printed on a new line, so in order to get it all on one, I piped the result to the `tr` command and removed the newline characters. The full command is shown below.
+
 ```sh
 $ grep -aio "[A-Za-z0-9_\-\{\}]" flag.txt | tr -d "\n"
 ```
+
+We get the flag
 
 `ictf{un1c0de_m4g1c_nahsdfoasihdfasohdfoiashdfjkadshfljadsfhdsklahflkhjdafs}`
 
@@ -61,7 +69,7 @@ What is the cosine of 42 radians, rounded to 100 decimal places? Wrap your flag 
 
 ---
 
-I used sympy's `evalf()` method
+We can't follow the same process as the `cos1` challenge, because 100 decimal places is way too much to be accurately rounded via `round()`. I ended up using sympy's `evalf()` method
 
 ```py
 >>> from sympy import cos
@@ -177,6 +185,16 @@ print(long_to_bytes(m))
 ```
 
 `ictf{just_f0r_y0uuuuuuuu}`
+
+---
+
+# show-me-what-you-got
+
+> Points: 75 | Category: Pwn | Author: Eth007
+
+Error messages? What error messages?
+
+---
 
 ---
 
