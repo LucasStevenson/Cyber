@@ -92,6 +92,29 @@ I hear that more bits of security is better, so I'm using MASSIVE primes, and a 
 
 ---
 
+Looking at the RSA implementation in the provided `enc.py` file, we can see that `n` is a huge number (10124 bits to be exact), and `e` is only 31. At first, I thought `m` would be small enough so that $m^{e} < n$. If this were the case, we could get the plaintext by taking the `e`th root of the ciphertext. Unfortunately, after giving this idea a shot, it did not return the flag, so we know that $m^{e} > n$. Because it didn't seem like the flag was padded, $m^{e}$ was most likely *barely* bigger than `n`.
+
+> Moving forward, we're going to use the fact that a modular congruence in the form $a \equiv b \pmod{n}$ can be rewritten as $a - b = kn$ for some integer k.
+
+```py
+#!/usr/bin/env python3
+from Crypto.Util.number import long_to_bytes
+from sympy import integer_nthroot
+
+with open("out.txt") as f:
+    n = int(f.readline().rstrip().split("= ")[1])
+    c = int(f.readline().rstrip().split("= ")[1])
+    e = 31
+
+for k in range(-1000, 0):
+    m, isroot = integer_nthroot(c - n*k, e)
+    if isroot:
+        print(f"{k=}")
+        print(long_to_bytes(m))
+        break
+```
+
+`ictf{d0nt_f0rget_t0_pad_y0ur_pl@intexts!}`
 
 ---
 
@@ -194,6 +217,9 @@ print(long_to_bytes(m))
 
 Error messages? What error messages?
 
+- https://imaginaryctf.org/f/xhFHQ#vuln
+- `nc got.ictf.kctf.cloud 1337`
+
 ---
 
 ---
@@ -231,5 +257,49 @@ for key in [ k.rstrip().zfill(16) for k in open("rockyou.txt", "rb").readlines()
 ```
 
 `ictf{d0nt_us3_w3ak_k3ys!!!!}`
+
+---
+
+# same
+
+> Points: 75 | Category: Crypto | Author: Eth007
+
+Something here is the same...
+
+- https://imaginaryctf.org/f/iC3Mt#same.py
+- https://imaginaryctf.org/f/EF3m1#output.txt
+
+---
+
+$c_{1} \equiv m^{e_{1}} \pmod{n}$  
+$c_{2} \equiv m^{e_{2}} \pmod{n}$  
+
+*Bézout's identity*: if $gcd(e_{1}, e_{2}) = 1$ then
+$\exists(a,b) \in \mathbb{Z} : a\*e_{1} + b\*e_{2} = 1$
+
+We can find `a` and `b` by using the extended euclidean algorithm. Once we get those two values, we can get `m`
+
+$m \equiv (c_{1}^a * c_{2}^b) \pmod{n}$
+
+```py
+#!/usr/bin/env python3
+from Crypto.Util.number import long_to_bytes
+
+with open("output.txt") as f:
+    n, c1, c2 = [ int(num.rstrip()) for num in f.readlines() ]
+    e1, e2 = [1337, 31337]
+
+def extended_gcd(a, b):
+    if a == 0:
+        return b, 0, 1
+    gcd, x, y = extended_gcd(b%a, a)
+    return gcd, y-(b//a)*x, x
+
+_, a, b = extended_gcd(e1, e2)
+m = pow(c1,a,n) * pow(c2,b,n) % n
+print(long_to_bytes(m))
+```
+
+`ictf{n3ver_r3use_m0dul1}`
 
 ---
