@@ -98,8 +98,8 @@ Looking at the RSA implementation in the provided `enc.py` file, we can see that
 
 So we know that $c \equiv m^{e} \pmod{n}$, and we will rewrite this as $c - m^{e} = kn$. There's some important things to note here
 
-- We've already established that $m^{e} > n$. This means $m^{e}$ *has to* be greater than $c$, because the maximum value $c$ can be is $n-1$
-- $c - m${e}$ will be a negative number. Therefore, $k*n$ is negative.
+- We've already established that $m^{e} > n$. This means $m^{e}$ *has to* be greater than $c$, because the maximum value `c` can be is `n-1`
+- $c - m^{e}$ will be a negative number. Therefore, $k*n$ is negative.
 - We know `n` is a positive product of two primes, so `k` must be a negative integer
 
 In order to get `m`, we need to find a `k` value such that $m = \sqrt[e]{c - kn}$. We'll know whether or not `k` is correct because if it is, `m` will be a perfect root. Below is a python script that brute forces `k` and prints the flag.
