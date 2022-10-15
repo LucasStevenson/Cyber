@@ -96,6 +96,14 @@ Looking at the RSA implementation in the provided `enc.py` file, we can see that
 
 > Moving forward, we're going to use the fact that a modular congruence in the form $a \equiv b \pmod{n}$ can be rewritten as $a - b = kn$ for some integer k.
 
+So we know that $c \equiv m^{e} \pmod{n}$, and we will rewrite this as $c - m^{e} = kn$. There's some important things to note here
+
+- We've already established that $m^{e} > n$. This means $m^{e}$ *has to* be greater than $c$, because the maximum value $c$ can be is $n-1$
+- $c - m${e}$ will be a negative number. Therefore, $k*n$ is negative.
+- We know `n` is a positive product of two primes, so `k` must be a negative integer
+
+In order to get `m`, we need to find a `k` value such that $m = \sqrt[e]{c - kn}$. We'll know whether or not `k` is correct because if it is, `m` will be a perfect root. Below is a python script that brute forces `k` and prints the flag.
+
 ```py
 #!/usr/bin/env python3
 from Crypto.Util.number import long_to_bytes
@@ -222,6 +230,48 @@ Error messages? What error messages?
 
 ---
 
+Opening up the `vuln` binary in ghidra, we can see the usual `main()` function and also a `win()` function. The `win()` function returns the flag, so clearly the goal of this challenge is to somehow call it. The code below is what the decompiled `main()` method looks like
+
+```c
+undefined8 main(void)
+
+{
+  long in_FS_OFFSET;
+  char local_118 [264];
+  long local_10;
+  
+  local_10 = *(long *)(in_FS_OFFSET + 0x28);
+  setvbuf(stdout,(char *)0x0,2,0);
+  setvbuf(stdin,(char *)0x0,2,0);
+  puts("Send your string to be printed:");
+  fgets(local_118,0x100,stdin);
+  printf(local_118);
+  puts("As someone wise once said, `sh`");
+  puts("(i think? not really sure about that one)");
+  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) {
+                    /* WARNING: Subroutine does not return */
+    __stack_chk_fail();
+  }
+  return 0;
+}
+```
+
+The `printf()` statement below `fgets()` looks interesting. Usually, when using `printf()` to output the value of a string, it uses the specifier that corresponds with the variable type. Example: `printf("%s\n", stringVariable)`. The table below is for reference about common specifiers in formatted strings.
+
+Specifier	| Output
+--------	| -------
+d		| Signed decimal integer
+u		| Unsigned decimal integer
+o		| Unsigned octal
+x		| Unsigned hexadecimal integer
+f		| Decimal floating point
+c		| Character
+s		| String of characters
+p		| Pointer address
+n		| Number of bytes written so far 
+
+In the actual program, the variable is passed in directly which makes it vulnerable to a format string attack.
+
 ---
 
 # aes
@@ -242,6 +292,17 @@ b"\xd6\x19O\xbeA\xb0\x15\x87\x0e\xc7\xc4\xc1\xe9h\xd8\xe6\xc6\x95\x82\xaa#\x91\x
 ```
 
 ---
+
+AES is a symmetric encryption algorithm, which means that the same key is used for both encryption and decryption. We can see that the key in this challenge is randomly chosen from the first 10,000 lines of the popular [rockyou](https://github.com/praetorian-inc/Hob0Rules/blob/master/wordlists/rockyou.txt.gz) wordlist. It's then padded, and used to encrypt the flag.  
+
+Here's how we're going to decrypt the flag (TLDR: Brute force key)
+
+1. Save ciphertext to a variable. I'll call it `enc` 
+2. Iterate over first 10,000 lines of `rockyou.txt`
+3. For each line (possible key), pad it by 16.
+4. Use this key to decrypt the ciphertext.
+	- If `ictf{` is in the decrypted text, then we know we got the flag. Challenge complete
+	- Else, use the next entry in the `rockyou` wordlist, and repeat the process
 
 ```py
 #!/usr/bin/env python3
@@ -279,7 +340,7 @@ $\exists(a,b) \in \mathbb{Z} : a\*e_{1} + b\*e_{2} = 1$
 
 We can find `a` and `b` by using the extended euclidean algorithm. Once we get those two values, we can get `m`
 
-$m \equiv (c_{1}^a * c_{2}^b) \pmod{n}$
+$m = (c_{1}^a * c_{2}^b) \pmod{n}$
 
 ```py
 #!/usr/bin/env python3
@@ -301,5 +362,84 @@ print(long_to_bytes(m))
 ```
 
 `ictf{n3ver_r3use_m0dul1}`
+
+---
+
+# Replacement
+
+> Points: 50 | Category: Web | Author: puzzler7
+
+Red flags and fake flags form an equivalence class.
+
+- http://puzzler7.imaginaryctf.org:4003/
+- `ictf:f2e8b632f71c2cab`
+
+---
+
+There's many ways to do this challenge.
+
+One of the ways is to use curl. I used the `--user` option to specify the name and password.
+
+```sh
+$ curl -s --user ictf:f2e8b632f71c2cab http://puzzler7.imaginaryctf.org:4003/totallynottheflag | grep "ictf{"
+```
+
+Another way is to simply go to `http:puzzler7.imaginaryctf.org:4003/totallynottheflag` and view the webpage source code. The reason this works is because the source code always shows the **original** page source, which in this case, contains the real flag *before* it gets overridden by the fake one.
+
+Lastly, looking at the `network` tab in developer console also works.
+
+`ictf{gr333333333333333n_flags_are_g00d_tho}`
+
+---
+
+# escape quikmafs
+
+> Points: 75 | Category: Misc | Author: puzzler7
+
+Answer 100 math questions and I'll give you the flag! There's just one small twist...
+
+- https://imaginaryctf.org/f/24yz2#server.py
+- `nc puzzler7.imaginaryctf.org 4006`
+
+---
+
+```py
+from pwn import *
+import re 
+
+r = remote("puzzler7.imaginaryctf.org", 4006)
+for _ in range(100):
+        res = r.recvuntilS(b'>>>')
+        question = re.search(r"(\d+ . \d+) =", res)[1]
+        ans = str(eval(question))
+        print(f"{question} = {ans}")
+        r.sendline(ans.encode())
+print(re.search(r"ictf{.*}", r.recvuntilS(b"}"))[0])
+```
+
+`ictf{congrats_you've_conquered_the_blackboard...for_now...}`
+
+---
+
+# Backtracking
+
+> Points: 50 | Category: Web | Author: puzzler7
+
+Look at how far you've come
+
+- http://puzzler7.imaginaryctf.org:4007/
+- `ictf:24dbcbffb8208024`
+
+---
+
+I copy-pasted this part of the deobfuscated code into the web console to see what it will evaluate to
+
+```js
+>> _0x5483d0(473) + _0x2b29f8(468) + "f{it'" + _0x2b29f8(461) + "the_f" + _0x5361d0(486) + "_you_" + _0x2b29f8(467) + _0x5483d0(472) + _0x26613c(484) + _0x2b29f8(480)
+```
+
+It gave me this: `"/?flag=ictf{it's_me_the_friend_you_made_along_the_way}"`
+
+`ictf{it's_me_the_friend_you_made_along_the_way}`
 
 ---
