@@ -35,6 +35,10 @@ Find the integer `a` such that $x \equiv a \pmod{935}$
 
 ## Solution
 
+To get the solution, we can use this equation 
+
+$x = \Sigma_{i=1}^{k} a_iN_iM_i \pmod{N}$ &ensp; where $N_i = N/n_i$ and $M_i = N_i^{-1} \pmod{n_i}$
+
 ```py
 #!/usr/bin/env python3
 import math
