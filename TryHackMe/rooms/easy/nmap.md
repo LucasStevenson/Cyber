@@ -6,6 +6,8 @@
 
 When a computer runs a network service, it opens a networking construct called a "port" to receive the connection.
 
+> I think of ports as a **logical/virtual endpoint used to identify which application (on a particular host) data should be sent to**
+
 Ports are necessary for making multiple network requests or having multiple services available.
 
 * For example, when you load several webpages at once in a web browser, the program must have some way of determining which tab is loading which web page. This is done by establishing connections to the remote webservers using different ports on your local machine.
