@@ -22,13 +22,15 @@ Note: if you are using the webshell, download and extract the disk image into `/
 
     `disk.flag.img: DOS/MBR boot sector; partition 1 : ID=0x83, active, start-CHS (0x0,32,33), end-CHS (0xc,223,19), startsector 2048, 204800 sectors; partition 2 : ID=0x82, start-CHS (0xc,223,20), end-CHS (0x19,159,6), startsector 206848, 204800 sectors; partition 3 : ID=0x83, start-CHS (0x19,159,7), end-CHS (0x32,253,11), startsector 411648, 407552 sectors`
 
-    I wasn't really sure what a boot sector was, but after doing a little bit of googling, I learned that the MBR (master boot record) boot sector is the first sector (usually the first 512 bytes) of a storage device that tells the computer how to load the operating system. 
+    > I wasn't really sure what a boot sector was, but after doing a little bit of googling, I learned that the MBR (master boot record) boot sector is the first sector (usually the first 512 bytes) of a storage device that contains the following:
+    >
+    > 1. A small program (**initial bootloader**) whose job is to find the bootable partition (*active* flag is set)
+    > 2. Partition table (how the drive is organized)
+    > 3. MBR signature (2 bytes: `55 AA`)
+    >
+    > Once the initial bootloader finds the bootable partition, it loads and executes the code found at the start of that partition (the **Volume Boot Record**), which then takes over and loads the OS into memory
 
-    The boot sector contains:
-    1. Instructions on how to load the OS into memory
-    2. Partition table (how the drive is organized)
-
-    Knowing that, we can see that the `disk.flag.img` disk image has 3 partitions.
+    We can see that the `disk.flag.img` disk image has 3 partitions.
 
     * Partition 1:
         - starts at sector 2048

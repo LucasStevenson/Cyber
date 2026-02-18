@@ -6,28 +6,34 @@ This repository is a collection of my notes and write-ups as I learn about cyber
 
 Below is a brief rundown of the main directories in this repository and what each contains.
 
-```
+```bash
 .
-├── CTF                  Capture The Flag resources and writeups
-│   ├── HTB               - HackTheBox challenges and solutions
-│   ├── ImaginaryCTF      - ImaginaryCTF challenges and solutions
-│   └── pico              - PicoCTF challenge solutions
-├── OverTheWire          OverTheWire wargame solutions
-├── TryHackMe            TryHackMe platform resources
-│   ├── challenges        - TryHackMe challenge solutions
-│   └── rooms             - Notes and writeups for specific rooms
-└── cryptohack           CryptoHack cryptography challenges
+├── CTF                     # Capture The Flag resources and writeups
+│   ├── ImaginaryCTF        # ImaginaryCTF challenges and solutions
+│   └── pico                # PicoCTF challenge solutions
+│
+├── HackTheBox              # HackTheBox platform resources
+│   ├── challenges          # Challenge solutions
+│   └── modules             # Notes for specific modules
+│
+├── OverTheWire             # OverTheWire wargame solutions
+│
+├── TryHackMe               # TryHackMe platform resources
+│   ├── challenges          # Challenge solutions
+│   └── rooms               # Notes for specific rooms
+│
+└── cryptohack              # CryptoHack cryptography challenges
 ```
 
 ## Main Platforms and Sources
 
-The table below lists the primary platforms featured in this repository, along with my opinion on the general difficulty of the challenges for each platform.
+The table below lists the learning platforms featured in this repository
 
-| Platform        | URL                                | Difficulty
-|-----------------|------------------------------------| ------------|
-| HackTheBox      | https://www.hackthebox.com         | Intermediate-Hard
-| ImaginaryCTF    | https://imaginaryctf.org           | Intermediate
-| PicoCTF         | https://picoctf.org                | Beginner-Intermediate
-| OverTheWire     | https://overthewire.org/wargames/  | Beginner-Intermediate
-| TryHackMe       | https://tryhackme.com              | Intermediate
-| CryptoHack      | https://cryptohack.org             | Intermediate
+| Platform        | URL                                
+|-----------------|----------------------------------
+| HackTheBox      | https://www.hackthebox.com         
+| ImaginaryCTF    | https://imaginaryctf.org           
+| PicoCTF         | https://picoctf.org                
+| OverTheWire     | https://overthewire.org/wargames
+| TryHackMe       | https://tryhackme.com              
+| CryptoHack      | https://cryptohack.org             
