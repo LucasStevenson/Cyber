@@ -13,7 +13,8 @@ Below is a brief rundown of the main directories in this repository and what eac
 │   └── pico                # PicoCTF challenge solutions
 │
 ├── HackTheBox              # HackTheBox platform resources
-│   ├── challenges          # Challenge solutions
+│   ├── challenges          # Solutions for short challenges
+│   ├── labs                # Multi-stage pentesting labs
 │   └── modules             # Notes for specific modules
 │
 ├── OverTheWire             # OverTheWire wargame solutions
